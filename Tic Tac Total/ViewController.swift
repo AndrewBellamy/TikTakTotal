@@ -10,8 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let nought:Int = 3
+    let cross:Int = 4
     
-
+    var gameHistory = [Game]()
+    
+    var playerOne = Player(name: "player one", avatar: "2", symbol: "1", point: 3, score: 0),
+        playerTwo = Player(name: "player two", avatar: "19", symbol: "4", point: 4, score: 0),
+        gameBoard = Board(A: 0,B: 0,C: 0,D: 0,E: 0,F: 0,G: 0,H: 0,I: 0),
+        currentPlayer:Player?,
+        restingPlayer:Player?
+    
+    @IBOutlet weak var runTime: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,7 +32,63 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func newGame(_ sender: Any) {
+        currentPlayer = playerOne
+        restingPlayer = playerTwo
+        updatePlayerLabel()
+    }
 
-
+    @IBAction func squareA(_ sender: UIButton) {
+        sender.setImage(UIImage(named: (currentPlayer?.symbol)!), for: .normal)
+        gameBoard.A = (currentPlayer?.point)!
+        changePlayer()
+        sender.isEnabled = false
+    }
+    
+    func changePlayer() {
+        let temp = currentPlayer
+        currentPlayer = restingPlayer
+        restingPlayer = temp
+        updatePlayerLabel()
+    }
+    
+    func updatePlayerLabel() {
+        runTime.text = currentPlayer?.name
+    }
+}
+struct Board {
+    var A:Int,
+    B:Int,
+    C:Int,
+    D:Int,
+    E:Int,
+    F:Int,
+    G:Int,
+    H:Int,
+    I:Int
 }
 
+struct Game {
+    var gameBoard:Board
+    
+    var currentPlayer:Player
+
+    mutating func changePlayer(player: Player) {
+        currentPlayer = player
+    }
+}
+
+struct Player {
+    var name:String?
+    var avatar:String?
+    var symbol:String?
+    var point:Int?
+    var score:Int = 0
+    mutating func changeSymbol() {
+        if symbol == "1" {
+            self.symbol = "4"
+        } else {
+            self.symbol = "1"
+        }
+    }
+}
