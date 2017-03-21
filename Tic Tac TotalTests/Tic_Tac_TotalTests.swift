@@ -10,6 +10,8 @@ import XCTest
 @testable import Tic_Tac_Total
 
 class Tic_Tac_TotalTests: XCTestCase {
+    // Setting viewController class for unit tests
+    var vc: ViewController!
     
     override func setUp() {
         super.setUp()
