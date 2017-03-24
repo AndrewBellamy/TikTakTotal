@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     //I
     var gameHistory = [Game]()
     
+    var historyViewCell:HistoryTableViewCell!
+    
     var playerOne = Player(name: "player one", avatar: "2", symbol: "1", point: 3, score: 0,identifier: 1),
         playerTwo = Player(name: "player two", avatar: "19", symbol: "4", point: 4, score: 0, identifier: 2),
         gameBoard:Board!,
@@ -29,10 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonG: UIButton!
     @IBOutlet weak var buttonH: UIButton!
     @IBOutlet weak var buttonI: UIButton!
-    @IBOutlet weak var playerOneAvatarImage: UIImageView!
-    @IBOutlet weak var playerTwoAvatarImage: UIImageView!
-    @IBOutlet weak var playerOneScore: UILabel!
-    @IBOutlet weak var playerTwoScore: UILabel!
+    @IBOutlet weak var playerAvatarImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +63,7 @@ class ViewController: UIViewController {
             button.setImage(nil, for: .normal)
             button.isEnabled = true
         }
-        playerOneAvatarImage.image = UIImage(named: playerOne.avatar!)
-        playerTwoAvatarImage.image = UIImage(named: playerTwo.avatar!)
-        updatePlayerScores()
+        //playerOneAvatarImage.image = UIImage(named: playerOne.avatar!)
     }
     
     @IBAction func square(_ sender: UIButton) {
@@ -138,11 +135,11 @@ class ViewController: UIViewController {
     
     func updatePlayerLabel() {
         runTime.text = currentPlayer.name
+        playerAvatarImage.image = UIImage(named: currentPlayer.avatar!)
     }
     
     func updatePlayerScores() {
-        playerOneScore.text = "\(playerOne.score)"
-        playerTwoScore.text = "\(playerTwo.score)"
+        //playerOneScore.text = "\(playerOne.score)"
     }
     
     func gameEnded(result: String) {
@@ -165,7 +162,6 @@ class ViewController: UIViewController {
             tempGame.winner = currentPlayer
             currentPlayer.score += 1
         }
-        updatePlayerScores()
     }
 }
 
