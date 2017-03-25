@@ -13,10 +13,8 @@ class ViewController: UIViewController {
     //I
     var gameHistory = [Game]()
     
-    var historyViewCell:HistoryTableViewCell!
-    
-    var playerOne = Player(name: "player one", avatar: "2", symbol: "1", point: 3, score: 0,identifier: 1),
-        playerTwo = Player(name: "player two", avatar: "19", symbol: "4", point: 4, score: 0, identifier: 2),
+    var playerOne = Player(name: "player one", symbol: "1", point: 3, score: 0,identifier: 1),
+        playerTwo = Player(name: "player two", symbol: "4", point: 4, score: 0, identifier: 2),
         gameBoard:Board!,
         currentPlayer:Player!
     //top label
@@ -36,15 +34,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        newLoad()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @IBAction func newGame(_ sender: UIButton) {
+    
+    func newLoad () {
         currentPlayer = playerOne
         gameBoard = Board(A: 0,B: 0,C: 0,D: 0,E: 0,F: 0,G: 0,H: 0,I: 0)
         updatePlayerLabel()
@@ -63,7 +56,11 @@ class ViewController: UIViewController {
             button.setImage(nil, for: .normal)
             button.isEnabled = true
         }
-        //playerOneAvatarImage.image = UIImage(named: playerOne.avatar!)
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func square(_ sender: UIButton) {
@@ -135,7 +132,7 @@ class ViewController: UIViewController {
     
     func updatePlayerLabel() {
         runTime.text = currentPlayer.name
-        playerAvatarImage.image = UIImage(named: currentPlayer.avatar!)
+        playerAvatarImage.image = UIImage(named: currentPlayer.symbol!)
     }
     
     func updatePlayerScores() {
@@ -157,11 +154,11 @@ class ViewController: UIViewController {
         for button in buttonArray {
             button.isEnabled = false
         }
-        var tempGame = Game(winner: nil, result: result)
+        let tempGame = Game(result: result)
         if (result != "Draw") {
-            tempGame.winner = currentPlayer
             currentPlayer.score += 1
         }
+        gameHistory.append(tempGame)
     }
 }
 
@@ -205,13 +202,11 @@ struct Board {
 }
 
 struct Game {
-    var winner:Player?
     var result:String
 }
 
 struct Player {
     var name:String?
-    var avatar:String?
     var symbol:String?
     var point:Int?
     var score:Int = 0
