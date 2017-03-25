@@ -9,8 +9,6 @@
 import UIKit
 
 class HistoryViewController: UITableViewController {
-
-    let myarray = ["item1", "item2", "item3"]
     
     @IBOutlet var tableview: UITableView!
     override func viewDidLoad() {
@@ -30,12 +28,12 @@ class HistoryViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myarray.count
+        return gameHistory.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customcell", for: indexPath) 
-        cell.textLabel?.text = myarray[indexPath.item]
+        cell.textLabel?.text = gameHistory[indexPath.item].result
         return cell
     }
 

@@ -9,10 +9,10 @@
 
 import UIKit
 
+var gameHistory = [Game]()
+
 class ViewController: UIViewController {
-    //I
-    var gameHistory = [Game]()
-    
+
     var playerOne = Player(name: "player one", symbol: "1", point: 3, score: 0,identifier: 1),
         playerTwo = Player(name: "player two", symbol: "4", point: 4, score: 0, identifier: 2),
         gameBoard:Board!,
@@ -159,6 +159,7 @@ class ViewController: UIViewController {
             currentPlayer.score += 1
         }
         gameHistory.append(tempGame)
+        
     }
 }
 
