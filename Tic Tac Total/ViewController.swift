@@ -8,15 +8,17 @@
 //
 
 import UIKit
+import AVFoundation
 
 var gameHistory = [Game]()
 
 class ViewController: UIViewController {
 
-    var playerOne = Player(name: "player one", symbol: "1", point: 3, score: 0,identifier: 1),
-        playerTwo = Player(name: "player two", symbol: "4", point: 4, score: 0, identifier: 2),
+    var playerOne = Player(name: "Player one", symbol: "1", point: 3, score: 0,identifier: 1),
+        playerTwo = Player(name: "Player two", symbol: "4", point: 4, score: 0, identifier: 2),
         gameBoard:Board!,
-        currentPlayer:Player!
+        currentPlayer:Player!,
+        player: AVAudioPlayer!
     //top label
     @IBOutlet weak var runTime: UILabel!
     //UI button elements for enabling/disabling
@@ -29,6 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonG: UIButton!
     @IBOutlet weak var buttonH: UIButton!
     @IBOutlet weak var buttonI: UIButton!
+    @IBOutlet weak var musicButton: UIButton!
     @IBOutlet weak var playerAvatarImage: UIImageView!
     
     override func viewDidLoad() {
@@ -56,11 +59,23 @@ class ViewController: UIViewController {
             button.setImage(nil, for: .normal)
             button.isEnabled = true
         }
+        setupMusicPlayer()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func music(_ sender: UIButton) {
+        if player != nil {
+            if player.isPlaying {
+                player.stop()
+            } else {
+                player.numberOfLoops = -1
+                player.prepareToPlay()
+                player.play()
+            }
+        }
     }
     
     @IBAction func square(_ sender: UIButton) {
@@ -160,6 +175,17 @@ class ViewController: UIViewController {
         }
         gameHistory.append(tempGame)
         
+    }
+    
+    func setupMusicPlayer() {
+        
+        let sound = NSDataAsset(name: "cellosuite")
+        
+        do {
+            player = try AVAudioPlayer(data: (sound?.data)!)
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
 }
 
