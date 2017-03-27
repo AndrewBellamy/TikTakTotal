@@ -39,14 +39,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sE2-mU-wJG">
-                                <rect key="frame" x="16" y="149" width="60" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="18"/>
-                                <connections>
-                                    <action selector="music:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ntT-bb-G7J"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="grid" translatesAutoresizingMaskIntoConstraints="NO" id="mmx-uG-Qvb">
                                 <rect key="frame" x="8" y="309" width="358" height="358"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
@@ -114,6 +106,15 @@
                                     <action selector="square:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MtC-J0-YRg"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Q6c-hj-WRe">
+                                <rect key="frame" x="22" y="164" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <connections>
+                                    <action selector="music:" destination="BYZ-38-t0r" eventType="valueChanged" id="eb2-DT-I8y"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -128,7 +129,7 @@
                         <outlet property="buttonG" destination="kNk-wW-gUf" id="ii6-kX-JsQ"/>
                         <outlet property="buttonH" destination="tlW-JO-Nzf" id="IhW-A5-E9t"/>
                         <outlet property="buttonI" destination="4iG-ek-90C" id="VeB-Ti-eIg"/>
-                        <outlet property="musicButton" destination="sE2-mU-wJG" id="SHn-sv-wP6"/>
+                        <outlet property="musicSwitch" destination="Q6c-hj-WRe" id="si6-sv-bzG"/>
                         <outlet property="playerAvatarImage" destination="YrD-lH-Ufo" id="3Jb-De-hD4"/>
                         <outlet property="runTime" destination="yul-qZ-0Bk" id="BDt-ff-jUh"/>
                     </connections>
@@ -203,7 +204,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ihj-d5-JGH">
                                 <rect key="frame" x="16" y="72" width="343" height="52"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="New Game"/>
                                 <connections>
@@ -212,7 +213,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FgI-Sg-5YE">
                                 <rect key="frame" x="16" y="132" width="343" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="History">
                                     <color key="titleColor" red="0.018645260483026505" green="0.47766226530075073" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -236,7 +237,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="18" width="526" height="525"/>
         <image name="grid" width="1242" height="1242"/>
     </resources>
 </document>

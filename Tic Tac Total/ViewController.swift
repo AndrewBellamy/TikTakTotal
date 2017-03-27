@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonG: UIButton!
     @IBOutlet weak var buttonH: UIButton!
     @IBOutlet weak var buttonI: UIButton!
-    @IBOutlet weak var musicButton: UIButton!
+    @IBOutlet weak var musicSwitch: UISwitch!
     @IBOutlet weak var playerAvatarImage: UIImageView!
     
     override func viewDidLoad() {
@@ -59,6 +59,7 @@ class ViewController: UIViewController {
             button.setImage(nil, for: .normal)
             button.isEnabled = true
         }
+        musicSwitch.isOn = false
         setupMusicPlayer()
     }
 
@@ -66,7 +67,9 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func music(_ sender: UIButton) {
+
+    
+    @IBAction func music(_ sender: UISwitch) {
         if player != nil {
             if player.isPlaying {
                 player.stop()
@@ -139,6 +142,8 @@ class ViewController: UIViewController {
     func changePlayer () {
         if (currentPlayer.identifier == 1) {
             currentPlayer = playerTwo
+            let next = gameBoard.aiResponse()
+            print(next)
         } else {
             currentPlayer = playerOne
         }
@@ -225,6 +230,40 @@ struct Board {
             
         }
         return result
+    }
+    
+    func aiResponse() -> Int {
+        //let cellArray:[Int] = [A,B,C,D,E,F,G,H,I]
+        let arrayArray:[[Int]] = [
+            [A, B, C],
+            [D, E, F],
+            [G, H, I],
+            [A, D, G],
+            [B, E, H],
+            [C, F, I],
+            [A, E, I],
+            [G, E, C],
+        ]
+        
+        //1st response
+        for tuple in arrayArray {
+            let calc = tuple[0] + tuple[1] + tuple[2]
+            if (calc == 8) {
+                let nextMove = tuple.index(of: 0)
+                return nextMove!
+            }
+        }
+        
+        //2nd response
+        for tuple in arrayArray {
+            let calc = tuple[0] + tuple[1] + tuple[2]
+            if (calc == 6) {
+                let nextMove = tuple.index(of: 0)
+                return nextMove!
+            }
+        }
+        
+        return 0
     }
 }
 
