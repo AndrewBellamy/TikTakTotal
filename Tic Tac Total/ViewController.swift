@@ -232,8 +232,8 @@ struct Board {
         return result
     }
     
-    func aiResponse() -> String {
-        //let cellArray:[Int] = [A,B,C,D,E,F,G,H,I]
+    mutating func aiResponse() -> String {
+        let dictionary:[String:Int] = ["A":A,"B":B,"C":C,"D":D,"E":E,"F":F,"G":G,"H":H,"I":I]
         let dictArray:[[String:Int]] = [
             ["A":A, "B":B, "C":C],
             ["D":D, "E":E, "F":F],
@@ -244,6 +244,7 @@ struct Board {
             ["A":A, "E":E, "I":I],
             ["G":G, "E":E, "C":C],
         ]
+        var nextMove = ""
         
         //1st response
         for dict in dictArray {
@@ -256,7 +257,7 @@ struct Board {
                 }
             }
             if (calc == 8) {
-                let nextMove = key
+                nextMove = key
                 return nextMove
             }
         }
@@ -272,51 +273,52 @@ struct Board {
                 }
             }
             if (calc == 6) {
-                let nextMove = key
+                nextMove = key
                 return nextMove
             }
         }
         
-        //3rd response
-        for dict in dictArray {
-            var nextMove = ""
-            var highestCount = 0
-            for (name,var value) in dict {
-                if (value == 0) {
-                    value = 2
-                }
-                var count = 0
-                for dict in dictArray {
-                    var calc = 0
-                    for (_,value) in dict {
-                        calc += value
-                    }
-                    if (calc == 5 || calc == 6) {
-                        count = count + 1
-                    }
-                }
-                if (count > highestCount) {
-                    nextMove = name
-                    highestCount = count
-                }
-            }
-            return nextMove
-        }
+        var highestCount = 0
         
-        //4th response
-        for dict in dictArray {
-            var nextMove = ""
-            var highestCount = 0
-            for (name,var value) in dict {
-                if (value == 0) {
-                    value = 2
+        //3rd response
+        for (name,value) in dictionary {
+            var count = 0
+            if (value == 0) {
+                switch name {
+                case "A":
+                    self.A = 2
+                case "B":
+                    self.B = 2
+                case "C":
+                    self.C = 2
+                case "D":
+                    self.D = 2
+                case "E":
+                    self.E = 2
+                case "F":
+                    self.F = 2
+                case "G":
+                    self.G = 2
+                case "H":
+                    self.H = 2
+                case "I":
+                    self.I = 2
+                default :
+                    print("No moves left")
                 }
-                var count = 0
-                for dict in dictArray {
-                    var calc = 0
-                    for (_,value) in dict {
-                        calc += value
-                    }
+                let tupleArray:[(first:Int,second:Int,third:Int)] = [
+                    (A, B, C),
+                    (D, E, F),
+                    (G, H, I),
+                    (A, D, G),
+                    (B, E, H),
+                    (C, F, I),
+                    (A, E, I),
+                    (G, E, C),
+                ]
+                for tuple in tupleArray {
+                    let calc = tuple.first + tuple.second + tuple.third
+                    print(calc)
                     if (calc == 2) {
                         count = count + 1
                     }
@@ -325,10 +327,32 @@ struct Board {
                     nextMove = name
                     highestCount = count
                 }
+                switch name {
+                case "A":
+                    self.A = 0
+                case "B":
+                    self.B = 0
+                case "C":
+                    self.C = 0
+                case "D":
+                    self.D = 0
+                case "E":
+                    self.E = 0
+                case "F":
+                    self.F = 0
+                case "G":
+                    self.G = 0
+                case "H":
+                    self.H = 0
+                case "I":
+                    self.I = 0
+                default :
+                    print("No moves left")
+                }
             }
-            return nextMove
+            
         }
-        return ""
+        return nextMove
     }
 }
 
