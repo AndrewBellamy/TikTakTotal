@@ -232,38 +232,103 @@ struct Board {
         return result
     }
     
-    func aiResponse() -> Int {
+    func aiResponse() -> String {
         //let cellArray:[Int] = [A,B,C,D,E,F,G,H,I]
-        let arrayArray:[[Int]] = [
-            [A, B, C],
-            [D, E, F],
-            [G, H, I],
-            [A, D, G],
-            [B, E, H],
-            [C, F, I],
-            [A, E, I],
-            [G, E, C],
+        let dictArray:[[String:Int]] = [
+            ["A":A, "B":B, "C":C],
+            ["D":D, "E":E, "F":F],
+            ["G":G, "H":H, "I":I],
+            ["A":A, "D":D, "G":G],
+            ["B":B, "E":E, "H":H],
+            ["C":C, "F":F, "I":I],
+            ["A":A, "E":E, "I":I],
+            ["G":G, "E":E, "C":C],
         ]
         
         //1st response
-        for tuple in arrayArray {
-            let calc = tuple[0] + tuple[1] + tuple[2]
+        for dict in dictArray {
+            var calc = 0
+            var key = ""
+            for (name,value) in dict {
+                calc += value
+                if (value == 0) {
+                    key = name
+                }
+            }
             if (calc == 8) {
-                let nextMove = tuple.index(of: 0)
-                return nextMove!
+                let nextMove = key
+                return nextMove
             }
         }
         
         //2nd response
-        for tuple in arrayArray {
-            let calc = tuple[0] + tuple[1] + tuple[2]
+        for dict in dictArray {
+            var calc = 0
+            var key = ""
+            for (name,value) in dict {
+                calc += value
+                if (value == 0) {
+                    key = name
+                }
+            }
             if (calc == 6) {
-                let nextMove = tuple.index(of: 0)
-                return nextMove!
+                let nextMove = key
+                return nextMove
             }
         }
         
-        return 0
+        //3rd response
+        for dict in dictArray {
+            var nextMove = ""
+            var highestCount = 0
+            for (name,var value) in dict {
+                if (value == 0) {
+                    value = 2
+                }
+                var count = 0
+                for dict in dictArray {
+                    var calc = 0
+                    for (_,value) in dict {
+                        calc += value
+                    }
+                    if (calc == 5 || calc == 6) {
+                        count = count + 1
+                    }
+                }
+                if (count > highestCount) {
+                    nextMove = name
+                    highestCount = count
+                }
+            }
+            return nextMove
+        }
+        
+        //4th response
+        for dict in dictArray {
+            var nextMove = ""
+            var highestCount = 0
+            for (name,var value) in dict {
+                if (value == 0) {
+                    value = 2
+                }
+                var count = 0
+                for dict in dictArray {
+                    var calc = 0
+                    for (_,value) in dict {
+                        calc += value
+                    }
+                    if (calc == 2) {
+                        count = count + 1
+                    }
+                }
+                if (count > highestCount) {
+                    nextMove = name
+                    highestCount = count
+                }
+            }
+            return nextMove
+        }
+        return ""
     }
 }
 
