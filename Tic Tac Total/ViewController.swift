@@ -319,11 +319,11 @@ struct Board {
                 for tuple in tupleArray {
                     let calc = tuple.first + tuple.second + tuple.third
                     print(calc)
-                    if (calc == 2) {
+                    if (calc == 5 || calc == 6 || calc == 2) {
                         count = count + 1
                     }
                 }
-                if (count > highestCount) {
+                if (count >= highestCount) {
                     nextMove = name
                     highestCount = count
                 }
