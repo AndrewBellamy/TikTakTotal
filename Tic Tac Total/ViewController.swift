@@ -144,6 +144,31 @@ class ViewController: UIViewController {
             currentPlayer = playerTwo
             let next = gameBoard.aiResponse()
             print(next)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                switch next {
+                case "A":
+                    self.buttonA.sendActions(for: .touchUpInside)
+                case "B":
+                    self.buttonB.sendActions(for: .touchUpInside)
+                case "C":
+                    self.buttonC.sendActions(for: .touchUpInside)
+                case "D":
+                    self.buttonD.sendActions(for: .touchUpInside)
+                case "E":
+                    self.buttonE.sendActions(for: .touchUpInside)
+                case "F":
+                    self.buttonF.sendActions(for: .touchUpInside)
+                case "G":
+                    self.buttonG.sendActions(for: .touchUpInside)
+                case "H":
+                    self.buttonH.sendActions(for: .touchUpInside)
+                case "I":
+                    self.buttonI.sendActions(for: .touchUpInside)
+                default:
+                    print("Error: AI response didn't return")
+                }
+            }
+            
         } else {
             currentPlayer = playerOne
         }
@@ -287,10 +312,16 @@ struct Board {
                 switch name {
                 case "A":
                     self.A = 2
+                    if (self.I == 0) {
+                        self.I = 5
+                    }
                 case "B":
                     self.B = 2
                 case "C":
                     self.C = 2
+                    if (self.G == 0) {
+                        self.G = 5
+                    }
                 case "D":
                     self.D = 2
                 case "E":
@@ -299,10 +330,16 @@ struct Board {
                     self.F = 2
                 case "G":
                     self.G = 2
+                    if (self.C == 0) {
+                        self.C = 5
+                    }
                 case "H":
                     self.H = 2
                 case "I":
                     self.I = 2
+                    if (self.A == 0) {
+                        self.A = 5
+                    }
                 default :
                     print("No moves left")
                 }
@@ -322,6 +359,9 @@ struct Board {
                     if (calc == 5 || calc == 6 || calc == 2) {
                         count = count + 1
                     }
+                    if (calc == 11) {
+                        count = count - 2
+                    }
                 }
                 if (count >= highestCount) {
                     nextMove = name
@@ -330,10 +370,16 @@ struct Board {
                 switch name {
                 case "A":
                     self.A = 0
+                    if (self.I == 5) {
+                        self.I = 0
+                    }
                 case "B":
                     self.B = 0
                 case "C":
                     self.C = 0
+                    if (self.G == 5) {
+                        self.G = 0
+                    }
                 case "D":
                     self.D = 0
                 case "E":
@@ -342,10 +388,16 @@ struct Board {
                     self.F = 0
                 case "G":
                     self.G = 0
+                    if (self.C == 5) {
+                        self.C = 0
+                    }
                 case "H":
                     self.H = 0
                 case "I":
                     self.I = 0
+                    if (self.A == 5) {
+                        self.A = 0
+                    }
                 default :
                     print("No moves left")
                 }
