@@ -2,7 +2,8 @@
 //  AppDelegate.swift
 //  Tic Tac Total
 //
-//  Created by Andrew Bellamy on 16/3/17.
+//  Created by Andrew Bellamy ID : 215240036 on 16/3/17
+//  SIT206 Assignment 1
 //  Copyright © 2017 Andrew Bellamy. All rights reserved.
 //
 

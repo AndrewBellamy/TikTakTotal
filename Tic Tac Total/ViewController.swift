@@ -10,18 +10,19 @@
 import UIKit
 import AVFoundation
 
-var gameHistory = [Game]()
-
 class ViewController: UIViewController {
 
-    var playerOne = Player(name: "Player one", symbol: "1", point: 3, score: 0,identifier: 1),
-        playerTwo = Player(name: "Player two", symbol: "4", point: 4, score: 0, identifier: 2),
-        gameBoard:Board!,
+    /**
+     Initialization variables
+    */
+    var gameBoard:Board!,
         currentPlayer:Player!,
         player: AVAudioPlayer!
-    //top label
+    
+    /**
+     In UI controls, set as variables for programmatic use.
+    */
     @IBOutlet weak var runTime: UILabel!
-    //UI button elements for enabling/disabling
     @IBOutlet weak var buttonA: UIButton!
     @IBOutlet weak var buttonB: UIButton!
     @IBOutlet weak var buttonC: UIButton!
@@ -40,6 +41,12 @@ class ViewController: UIViewController {
         newLoad()
     }
     
+    /**
+     Convenience method for handling the new game on segue.
+     - returns:
+     Sets all gameboard buttons to clear, currentPlayer as player one
+     and sets up the music player
+    */
     func newLoad () {
         currentPlayer = playerOne
         gameBoard = Board(A: 0,B: 0,C: 0,D: 0,E: 0,F: 0,G: 0,H: 0,I: 0)
@@ -67,8 +74,16 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
+    /**
+     Handles the music player events when switch is clicked.
+     
+     - parameters:
+        - sender: The UISwitch control.
+     
+     - returns:
+     Switches between play and stop.
+    */
     @IBAction func music(_ sender: UISwitch) {
         if player != nil {
             if player.isPlaying {
@@ -81,6 +96,12 @@ class ViewController: UIViewController {
         }
     }
     
+    /**
+     Handles the event called by each button on the game board grid.
+     
+     - parameters:
+        - sender: The UI Button control.
+    */
     @IBAction func square(_ sender: UIButton) {
         
         switch sender.tag {
@@ -139,6 +160,10 @@ class ViewController: UIViewController {
         }
     }
     
+    /**
+     Handles changing the current player. Will also call the aiResponse method of the
+     game board and the updatePlayerLabel method.
+    */
     func changePlayer () {
         if (currentPlayer.identifier == 1) {
             currentPlayer = playerTwo
@@ -175,15 +200,31 @@ class ViewController: UIViewController {
         updatePlayerLabel()
     }
     
+    /**
+     Handles setting the UI controls label and image view to reflect the current player.
+    */
     func updatePlayerLabel() {
         runTime.text = currentPlayer.name
         playerAvatarImage.image = UIImage(named: currentPlayer.symbol!)
     }
     
-    func updatePlayerScores() {
-        //playerOneScore.text = "\(playerOne.score)"
+    /**
+     Handles adding a winning score to the current player. Called by check result method.
+    */
+    func updatePlayerScores(identifier: Int) {
+        switch identifier {
+            case 1:
+                playerOne.score = playerOne.score + 1
+            case 2:
+                playerTwo.score = playerTwo.score + 1
+            default:break
+        }
+        
     }
     
+    /**
+     Handles all UI and programmatic events when the game ends.
+    */
     func gameEnded(result: String) {
         let buttonArray:[UIButton] = [
             buttonA,
@@ -201,12 +242,18 @@ class ViewController: UIViewController {
         }
         let tempGame = Game(result: result)
         if (result != "Draw") {
-            currentPlayer.score += 1
+            updatePlayerScores(identifier: currentPlayer.identifier)
         }
         gameHistory.append(tempGame)
         
     }
     
+    /**
+     Loads the audio control and music asset
+     
+     - throws:
+        an error if music asset isn;t found.
+    */
     func setupMusicPlayer() {
         
         let sound = NSDataAsset(name: "cellosuite")
@@ -219,6 +266,17 @@ class ViewController: UIViewController {
     }
 }
 
+/**
+ Struct for the game board. Each board conatins methods for checking if a result has occured
+ and responding as player two AI.
+ 
+ - methods:
+ checkResult
+ aiResponse
+ 
+ - variables: 
+ A:Int, B:Int, C:Int, D,:Int E:Int, F:Int, G:Int, H:Int, I:Int
+*/
 struct Board {
     var A:Int,
     B:Int,
@@ -230,6 +288,14 @@ struct Board {
     H:Int,
     I:Int
     
+    /**
+     Handles calculations for determining the game result.
+     
+     - parameters: 
+        - player: Caller passes the current player which is assigned the win.
+     
+     - returns: String result, either player win or draw.
+    */
     func checkResult(player: String) -> String? {
         var result:String?
         let cellArray:[Int] = [A,B,C,D,E,F,G,H,I]
@@ -257,6 +323,14 @@ struct Board {
         return result
     }
     
+    /**
+     Handles the response from AI. Using a three tier set of nested conditionals.
+     The first response for the AI is to win. The second response is to stop the opposing
+     player from winning. The third response is to increase opportunity and decrease the
+     opposing opportunity.
+     
+     - returns: String for AI response
+     */
     mutating func aiResponse() -> String {
         let dictionary:[String:Int] = ["A":A,"B":B,"C":C,"D":D,"E":E,"F":F,"G":G,"H":H,"I":I]
         let dictArray:[[String:Int]] = [
@@ -309,36 +383,37 @@ struct Board {
         for (name,value) in dictionary {
             var count = 0
             if (value == 0) {
+                print("possible: " + name)
                 switch name {
                 case "A":
-                    self.A = 2
+                    self.A = 5
                     if (self.I == 0) {
-                        self.I = 5
+                        self.I = 7
                     }
                 case "B":
-                    self.B = 2
+                    self.B = 5
                 case "C":
-                    self.C = 2
+                    self.C = 5
                     if (self.G == 0) {
-                        self.G = 5
+                        self.G = 7
                     }
                 case "D":
-                    self.D = 2
+                    self.D = 5
                 case "E":
-                    self.E = 2
+                    self.E = 5
                 case "F":
-                    self.F = 2
+                    self.F = 5
                 case "G":
-                    self.G = 2
+                    self.G = 5
                     if (self.C == 0) {
-                        self.C = 5
+                        self.C = 7
                     }
                 case "H":
-                    self.H = 2
+                    self.H = 5
                 case "I":
-                    self.I = 2
+                    self.I = 5
                     if (self.A == 0) {
-                        self.A = 5
+                        self.A = 7
                     }
                 default :
                     print("No moves left")
@@ -356,10 +431,13 @@ struct Board {
                 for tuple in tupleArray {
                     let calc = tuple.first + tuple.second + tuple.third
                     print(calc)
-                    if (calc == 5 || calc == 6 || calc == 2) {
+                    if (calc == 5 || calc == 8 || calc == 9 || calc == 15) {
                         count = count + 1
                     }
-                    if (calc == 11) {
+                    if (calc == 12) {
+                        count = count - 1
+                    }
+                    if (calc == 16) {
                         count = count - 2
                     }
                 }
@@ -370,14 +448,14 @@ struct Board {
                 switch name {
                 case "A":
                     self.A = 0
-                    if (self.I == 5) {
+                    if (self.I == 7) {
                         self.I = 0
                     }
                 case "B":
                     self.B = 0
                 case "C":
                     self.C = 0
-                    if (self.G == 5) {
+                    if (self.G == 7) {
                         self.G = 0
                     }
                 case "D":
@@ -388,14 +466,14 @@ struct Board {
                     self.F = 0
                 case "G":
                     self.G = 0
-                    if (self.C == 5) {
+                    if (self.C == 7) {
                         self.C = 0
                     }
                 case "H":
                     self.H = 0
                 case "I":
                     self.I = 0
-                    if (self.A == 5) {
+                    if (self.A == 7) {
                         self.A = 0
                     }
                 default :
@@ -408,21 +486,10 @@ struct Board {
     }
 }
 
+/**
+ Struct for game results which are appended to the game history once a game has ended.
+ These are displayed in the history UI table.
+ */
 struct Game {
     var result:String
-}
-
-struct Player {
-    var name:String?
-    var symbol:String?
-    var point:Int?
-    var score:Int = 0
-    var identifier:Int
-    mutating func changeSymbol() {
-        if symbol == "1" {
-            self.symbol = "4"
-        } else {
-            self.symbol = "1"
-        }
-    }
 }
