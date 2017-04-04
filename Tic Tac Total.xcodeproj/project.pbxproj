@@ -16,6 +16,7 @@
 		4983382C1E7A939D009327D2 /* Tic_Tac_TotalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4983382B1E7A939D009327D2 /* Tic_Tac_TotalUITests.swift */; };
 		49A301EA1E85FEFA00F9D9D8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A301E91E85FEFA00F9D9D8 /* MenuViewController.swift */; };
 		49A301F01E8624AC00F9D9D8 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A301EF1E8624AC00F9D9D8 /* HistoryViewController.swift */; };
+		49E80CB71E93BED800E51E3A /* SymbolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E80CB61E93BED800E51E3A /* SymbolsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		4983382D1E7A939D009327D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49A301E91E85FEFA00F9D9D8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		49A301EF1E8624AC00F9D9D8 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		49E80CB61E93BED800E51E3A /* SymbolsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				4983380F1E7A939D009327D2 /* Main.storyboard */,
 				49A301EF1E8624AC00F9D9D8 /* HistoryViewController.swift */,
 				498338121E7A939D009327D2 /* Assets.xcassets */,
+				49E80CB61E93BED800E51E3A /* SymbolsViewController.swift */,
 				49A301E91E85FEFA00F9D9D8 /* MenuViewController.swift */,
 				498338141E7A939D009327D2 /* LaunchScreen.storyboard */,
 				498338171E7A939D009327D2 /* Info.plist */,
@@ -272,6 +275,7 @@
 				4983380C1E7A939D009327D2 /* AppDelegate.swift in Sources */,
 				49A301EA1E85FEFA00F9D9D8 /* MenuViewController.swift in Sources */,
 				49A301F01E8624AC00F9D9D8 /* HistoryViewController.swift in Sources */,
+				49E80CB71E93BED800E51E3A /* SymbolsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
