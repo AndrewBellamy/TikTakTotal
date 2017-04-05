@@ -2,7 +2,8 @@
 //  SettingsViewController.swift
 //  Tic Tac Total
 //
-//  Created by Andrew Bellamy on 5/4/17.
+//  Created by Andrew Bellamy ID : 215240036 on 16/3/17
+//  SIT206 Assignment 1
 //  Copyright © 2017 Andrew Bellamy. All rights reserved.
 //
 
@@ -16,12 +17,12 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Check if AI is on, button reacts accordingly.
         if (aiIsOn == true) {
             playerTwoAI.isOn = true
         } else {
             playerTwoAI.isOn = false
         }
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,21 +30,24 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /**
+     For symbol buttons. Passes tag to identify which player to change.
+    */
     @IBAction func changePlayerSymbol(_ sender: UIButton) {
         performSegue(withIdentifier: "SymbolSelectSegue", sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        //Place any other segue preps in here by identifier.
         if segue.identifier == "SymbolSelectSegue" {
-            
             let toViewController = segue.destination as! SymbolsViewController
-            
             toViewController.requestingPlayer = (sender as AnyObject).tag
-            
         }
     }
 
+    /**
+     Handles setting the AI on/off.
+    */
     @IBAction func onSetAI(_ sender: UISwitch) {
         if (sender.isOn == true) {
             aiIsOn = true
@@ -51,14 +55,5 @@ class SettingsViewController: UIViewController {
             aiIsOn = false
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

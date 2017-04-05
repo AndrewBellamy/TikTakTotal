@@ -2,7 +2,8 @@
 //  SymbolsViewController.swift
 //  Tic Tac Total
 //
-//  Created by Andrew Bellamy on 4/4/17.
+//  Created by Andrew Bellamy ID : 215240036 on 16/3/17
+//  SIT206 Assignment 1
 //  Copyright © 2017 Andrew Bellamy. All rights reserved.
 //
 
@@ -10,6 +11,9 @@ import UIKit
 
 class SymbolsViewController: UITableViewController {
     
+    /**
+     All the available assets for symbols.
+    */
     var symbolArray:[String] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"],
         requestingPlayer:Int?
 
@@ -18,6 +22,7 @@ class SymbolsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //remove the current symbol of opposing player. No duplicates!
         if (requestingPlayer == 1) {
             SymbolNavBar.title = "Player One"
             symbolArray.remove(at: symbolArray.index(of: playerTwo.symbol!)!)
@@ -25,9 +30,6 @@ class SymbolsViewController: UITableViewController {
             SymbolNavBar.title = "Player Two"
             symbolArray.remove(at: symbolArray.index(of: playerOne.symbol!)!)
         }
-        
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,16 +60,6 @@ class SymbolsViewController: UITableViewController {
             playerTwo.symbol = symbolArray[indexPath.item]
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
         
 }
 

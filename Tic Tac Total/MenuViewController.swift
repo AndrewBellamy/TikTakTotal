@@ -50,6 +50,9 @@ class MenuViewController: UIViewController {
         performSegue(withIdentifier: "NewGameSegue", sender: nil)
     }
     
+    /**
+     Handles segue from menu to the settings viewController.
+    */
     @IBAction func settings(_ sender: Any) {
         performSegue(withIdentifier: "SettingsSegue", sender: nil)
     }
@@ -60,29 +63,16 @@ class MenuViewController: UIViewController {
     @IBAction func history(_ sender: UIButton) {
         performSegue(withIdentifier: "HistorySegue", sender: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
+/**
+ Struct for the players.
+*/
 struct Player {
     var name:String?
     var symbol:String?
     var point:Int?
     var score:Int = 0
     var identifier:Int
-    mutating func changeSymbol() {
-        if symbol == "1" {
-            self.symbol = "4"
-        } else {
-            self.symbol = "1"
-        }
-    }
 }
