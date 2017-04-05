@@ -104,6 +104,7 @@ class ViewController: UIViewController {
     */
     @IBAction func square(_ sender: UIButton) {
         
+        self.view.isUserInteractionEnabled = false
         switch sender.tag {
         case 1:
             sender.setImage(UIImage(named: (currentPlayer.symbol)!), for: .normal)
@@ -158,6 +159,7 @@ class ViewController: UIViewController {
         } else {
             changePlayer()
         }
+        self.view.isUserInteractionEnabled = true
     }
     
     /**
@@ -167,30 +169,32 @@ class ViewController: UIViewController {
     func changePlayer () {
         if (currentPlayer.identifier == 1) {
             currentPlayer = playerTwo
-            let next = gameBoard.aiResponse()
-            print(next)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                switch next {
-                case "A":
-                    self.buttonA.sendActions(for: .touchUpInside)
-                case "B":
-                    self.buttonB.sendActions(for: .touchUpInside)
-                case "C":
-                    self.buttonC.sendActions(for: .touchUpInside)
-                case "D":
-                    self.buttonD.sendActions(for: .touchUpInside)
-                case "E":
-                    self.buttonE.sendActions(for: .touchUpInside)
-                case "F":
-                    self.buttonF.sendActions(for: .touchUpInside)
-                case "G":
-                    self.buttonG.sendActions(for: .touchUpInside)
-                case "H":
-                    self.buttonH.sendActions(for: .touchUpInside)
-                case "I":
-                    self.buttonI.sendActions(for: .touchUpInside)
-                default:
-                    print("Error: AI response didn't return")
+            if (aiIsOn == true) {
+                let next = gameBoard.aiResponse()
+                print(next)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    switch next {
+                    case "A":
+                        self.buttonA.sendActions(for: .touchUpInside)
+                    case "B":
+                        self.buttonB.sendActions(for: .touchUpInside)
+                    case "C":
+                        self.buttonC.sendActions(for: .touchUpInside)
+                    case "D":
+                        self.buttonD.sendActions(for: .touchUpInside)
+                    case "E":
+                        self.buttonE.sendActions(for: .touchUpInside)
+                    case "F":
+                        self.buttonF.sendActions(for: .touchUpInside)
+                    case "G":
+                        self.buttonG.sendActions(for: .touchUpInside)
+                    case "H":
+                        self.buttonH.sendActions(for: .touchUpInside)
+                    case "I":
+                        self.buttonI.sendActions(for: .touchUpInside)
+                    default:
+                        print("Error: AI response didn't return")
+                    }
                 }
             }
             

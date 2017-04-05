@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		493CD3AD1E94E62200988FC6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493CD3AC1E94E62200988FC6 /* SettingsViewController.swift */; };
 		4983380C1E7A939D009327D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4983380B1E7A939D009327D2 /* AppDelegate.swift */; };
 		4983380E1E7A939D009327D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4983380D1E7A939D009327D2 /* ViewController.swift */; };
 		498338111E7A939D009327D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4983380F1E7A939D009327D2 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		493CD3AC1E94E62200988FC6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		498338081E7A939D009327D2 /* Tic Tac Total.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tic Tac Total.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4983380B1E7A939D009327D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4983380D1E7A939D009327D2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				498338121E7A939D009327D2 /* Assets.xcassets */,
 				49E80CB61E93BED800E51E3A /* SymbolsViewController.swift */,
 				49A301E91E85FEFA00F9D9D8 /* MenuViewController.swift */,
+				493CD3AC1E94E62200988FC6 /* SettingsViewController.swift */,
 				498338141E7A939D009327D2 /* LaunchScreen.storyboard */,
 				498338171E7A939D009327D2 /* Info.plist */,
 			);
@@ -276,6 +279,7 @@
 				49A301EA1E85FEFA00F9D9D8 /* MenuViewController.swift in Sources */,
 				49A301F01E8624AC00F9D9D8 /* HistoryViewController.swift in Sources */,
 				49E80CB71E93BED800E51E3A /* SymbolsViewController.swift in Sources */,
+				493CD3AD1E94E62200988FC6 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

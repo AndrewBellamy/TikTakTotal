@@ -15,19 +15,27 @@ import UIKit
  */
 var gameHistory = [Game](),
 playerOne = Player(name: "Player one", symbol: "1", point: 3, score: 0, identifier: 1),
-playerTwo = Player(name: "Player two", symbol: "4", point: 4, score: 0, identifier: 2)
+playerTwo = Player(name: "Player two", symbol: "4", point: 4, score: 0, identifier: 2),
+aiIsOn:DarwinBoolean = true
 
 class MenuViewController: UIViewController {
     
     //Player symbols on the menu
     @IBOutlet weak var playerOneSymbol: UIImageView!
     @IBOutlet weak var playerTwoSymbol: UIImageView!
+    @IBOutlet weak var playerOneScore: UILabel?
+    @IBOutlet weak var playerTwoScore: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         playerOneSymbol.image = UIImage(named: playerOne.symbol!)
         playerTwoSymbol.image = UIImage(named: playerTwo.symbol!)
-        // Do any additional setup after loading the view.
+        playerOneScore?.text = String(playerOne.score)
+        playerTwoScore?.text = String(playerTwo.score)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +48,10 @@ class MenuViewController: UIViewController {
     */
     @IBAction func newGame(_ sender: UIButton) {
         performSegue(withIdentifier: "NewGameSegue", sender: nil)
+    }
+    
+    @IBAction func settings(_ sender: Any) {
+        performSegue(withIdentifier: "SettingsSegue", sender: nil)
     }
     
     /**
